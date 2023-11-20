@@ -17,14 +17,16 @@ requirements:
 
 checks:
   - id: 1
-    title: "Disable password auth"
-    description: "Check for sshd_config for disabled password auth"
+    title: "SSH Hardening: Password authentication should be disabled"
+    description: "SSH Daemon should reject passwords during authentication"
+    remediation: "Set config line: 'PasswordAuthentication no' in /etc/ssh/sshd_config file"
     condition: all
     rules:
       - "f:$sshd_file -> r:^PasswordAuthentication no"
   - id: 2
-    title: "Disable root logon"
-    description: "Check for sshd_config for disabled root logon"
+    title: "SSH Hardening: Root user should not be allowed for login"
+    description: "SSH Daemon should reject root login"
+    remediation: "Set config line: 'PermitRootLogin no' in /etc/ssh/sshd_config file"
     condition: all
     rules:
       - "f:$sshd_file -> r:^PermitRootLogin no"
